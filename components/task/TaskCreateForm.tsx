@@ -80,25 +80,25 @@ export function TaskCreateForm({
   }
 
   return (
-    <Card className="border-white/10 bg-black/40">
+    <Card>
       <CardHeader>
-        <CardTitle className="text-base">New Task</CardTitle>
-        <CardDescription className="text-xs">
+        <CardTitle>New Task</CardTitle>
+        <CardDescription>
           Tasks linked to the selected proposal.
         </CardDescription>
       </CardHeader>
       <form onSubmit={handleSubmit}>
-        <CardContent className="space-y-3">
+        <CardContent className="space-y-4">
           {!proposalId && (
-            <p className="text-xs text-amber-300">
+            <p className="text-sm text-amber-500 bg-amber-500/10 border border-amber-500/20 rounded-lg p-3">
               Select a proposal in the middle column to create tasks.
             </p>
           )}
 
-          <div className="space-y-1.5">
+          <div className="space-y-2">
             <label
               htmlFor="task-title"
-              className="text-xs font-medium text-slate-200"
+              className="text-sm font-semibold text-foreground"
             >
               Title
             </label>
@@ -111,10 +111,10 @@ export function TaskCreateForm({
             />
           </div>
 
-          <div className="space-y-1.5">
+          <div className="space-y-2">
             <label
               htmlFor="task-description"
-              className="text-xs font-medium text-slate-200"
+              className="text-sm font-semibold text-foreground"
             >
               Description
             </label>
@@ -128,13 +128,13 @@ export function TaskCreateForm({
             />
           </div>
 
-          <div className="grid gap-3 sm:grid-cols-2">
-            <div className="space-y-1.5">
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div className="space-y-2">
               <label
                 htmlFor="task-budget"
-                className="text-xs font-medium text-slate-200"
+                className="text-sm font-semibold text-foreground"
               >
-                Budget (optional)
+                Budget <span className="text-muted-foreground font-normal">(optional)</span>
               </label>
               <Input
                 id="task-budget"
@@ -148,12 +148,12 @@ export function TaskCreateForm({
               />
             </div>
 
-            <div className="space-y-1.5">
+            <div className="space-y-2">
               <label
                 htmlFor="task-deadline"
-                className="text-xs font-medium text-slate-200"
+                className="text-sm font-semibold text-foreground"
               >
-                Deadline (optional)
+                Deadline <span className="text-muted-foreground font-normal">(optional)</span>
               </label>
               <Input
                 id="task-deadline"
@@ -166,7 +166,7 @@ export function TaskCreateForm({
           </div>
 
           {error && (
-            <p className="text-xs text-red-400">Error creating task: {error}</p>
+            <p className="text-sm text-destructive">Error creating task: {error}</p>
           )}
         </CardContent>
         <CardFooter>

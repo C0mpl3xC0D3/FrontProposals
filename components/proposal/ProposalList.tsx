@@ -45,48 +45,48 @@ export function ProposalList({
   onStatusChange,
 }: ProposalListProps) {
   return (
-    <Card className="border-white/10 bg-black/40">
+    <Card>
       <CardHeader>
-        <CardTitle className="text-base">
+        <CardTitle>
           Proposals{!loading && ` (${proposals.length})`}
         </CardTitle>
-        <CardDescription className="text-xs">
+        <CardDescription>
           Operational proposals and decisions stored in Vetra.
         </CardDescription>
       </CardHeader>
 
-      <CardContent className="space-y-3">
+      <CardContent className="space-y-4">
         {loading && (
-          <div className="space-y-2">
+          <div className="space-y-3">
             {[1, 2, 3].map((i) => (
               <div
                 key={i}
-                className="rounded-md border border-slate-800/80 bg-black/60 p-3"
+                className="rounded-lg border bg-muted/30 p-4"
               >
-                <Skeleton className="mb-2 h-4 w-2/3" />
-                <Skeleton className="h-3 w-1/2" />
+                <Skeleton className="mb-2 h-5 w-2/3" />
+                <Skeleton className="h-4 w-1/2" />
               </div>
             ))}
           </div>
         )}
 
         {error && (
-          <p className="text-xs text-red-400">
+          <p className="text-sm text-destructive">
             Error loading proposals: {error}
           </p>
         )}
 
         {!loading && !error && proposals.length === 0 && (
-          <div className="flex flex-col items-center gap-2 py-6 text-center">
-            <FileText className="size-8 text-slate-600" />
-            <p className="text-sm text-slate-400">No proposals yet</p>
-            <p className="text-xs text-slate-500">
+          <div className="flex flex-col items-center gap-3 py-8 text-center">
+            <FileText className="size-10 text-muted-foreground/50" />
+            <p className="text-base font-medium text-muted-foreground">No proposals yet</p>
+            <p className="text-sm text-muted-foreground/70">
               Create one using the form on the left to get started.
             </p>
           </div>
         )}
 
-        <div className="space-y-2">
+        <div className="space-y-3">
           {proposals.map((proposal, index) => {
             const isSelected = proposal.id === selectedProposalKey;
             const taskCount = taskCountByProposal?.[proposal.id] ?? 0;
@@ -101,16 +101,16 @@ export function ProposalList({
                   aria-pressed={isSelected}
                   onClick={() => onSelectProposal(proposal.id)}
                   className={[
-                    "w-full rounded-md border px-3 py-2 text-left text-xs transition",
+                    "w-full rounded-lg border px-4 py-3 text-left transition-all",
                     isSelected
-                      ? "border-emerald-500/70 bg-emerald-500/10"
-                      : "border-slate-800 bg-black/60 hover:border-emerald-500/50 hover:bg-black",
+                      ? "border-primary bg-primary/10 shadow-sm"
+                      : "border-border/60 bg-card hover:border-primary/50 hover:bg-muted/30 hover:shadow-sm",
                   ].join(" ")}
                 >
-                  <div className="flex items-start justify-between gap-2">
-                    <div className="min-w-0 flex-1">
-                      <div className="flex items-center gap-2">
-                        <span className="font-semibold text-slate-100 truncate">
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="min-w-0 flex-1 space-y-2">
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <span className="font-semibold text-foreground truncate text-sm">
                           {proposal.title}
                         </span>
                         <Badge
@@ -121,37 +121,36 @@ export function ProposalList({
                               | "status-closed"
                               | "status-archived"
                           }
-                          className="text-[10px] uppercase tracking-[0.16em]"
                         >
                           {getStatusLabel(status)}
                         </Badge>
                       </div>
 
                       {proposal.description && (
-                        <p className="mt-1 text-xs text-slate-400 line-clamp-2">
+                        <p className="text-sm text-muted-foreground line-clamp-2 leading-relaxed">
                           {proposal.description}
                         </p>
                       )}
 
-                      <div className="mt-1 flex items-center gap-3">
-                        <span className="font-mono text-xs text-emerald-300/80">
+                      <div className="flex items-center gap-3 flex-wrap text-xs text-muted-foreground">
+                        <span className="font-mono text-primary/90">
                           {truncateId(proposal.id)}
                         </span>
                         {proposal.createdAt && (
-                          <span className="text-xs text-slate-500">
+                          <span>
                             {formatDate(proposal.createdAt)}
                           </span>
                         )}
-                        <span className="text-xs text-slate-500">
+                        <span className="font-medium">
                           {taskCount} {taskCount === 1 ? "task" : "tasks"}
                         </span>
                       </div>
                     </div>
 
                     {proposal.budget != null && (
-                      <div className="text-right text-xs text-emerald-300">
-                        Budget
-                        <div className="text-sm font-semibold">
+                      <div className="text-right text-xs text-muted-foreground">
+                        <div className="text-[10px] uppercase tracking-wider mb-1">Budget</div>
+                        <div className="text-base font-semibold text-primary">
                           {proposal.budget}
                         </div>
                       </div>
@@ -168,9 +167,9 @@ export function ProposalList({
                       e.stopPropagation();
                       onStatusChange(proposal.id, nextStatus);
                     }}
-                    className="w-full text-xs"
+                    className="w-full"
                   >
-                    <ArrowRight className="mr-1 size-3" />
+                    <ArrowRight className="mr-2 size-4" />
                     {actionLabel}
                   </Button>
                 )}

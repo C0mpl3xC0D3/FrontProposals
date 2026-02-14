@@ -17,10 +17,10 @@ export interface DaoBoardHeaderProps {
 export function DaoBoardHeader({ dao }: DaoBoardHeaderProps) {
   if (!dao) {
     return (
-      <Card className="border-white/10 bg-black/40">
+      <Card>
         <CardHeader>
-          <CardTitle className="text-base">DAO not found</CardTitle>
-          <CardDescription className="text-xs">
+          <CardTitle>DAO not found</CardTitle>
+          <CardDescription>
             We couldn&apos;t load this DAO&apos;s data from Vetra.
           </CardDescription>
         </CardHeader>
@@ -29,36 +29,33 @@ export function DaoBoardHeader({ dao }: DaoBoardHeaderProps) {
   }
 
   return (
-    <Card className="border-white/10 bg-black/40">
-      <CardHeader className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <CardTitle className="flex items-center gap-2 text-xl text-slate-50">
+    <Card>
+      <CardHeader className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+        <div className="space-y-2">
+          <CardTitle className="flex items-center gap-3">
             {dao.name}
-            <Badge
-              variant="outline"
-              className="border-emerald-500/60 text-[10px] uppercase tracking-[0.16em] text-emerald-300"
-            >
+            <Badge variant="default">
               DAO
             </Badge>
           </CardTitle>
-          <CardDescription className="text-xs text-slate-300">
+          <CardDescription className="text-sm leading-relaxed">
             {dao.description ?? "DAO without description"}
           </CardDescription>
         </div>
-        <div className="flex items-center gap-3 text-xs text-slate-400">
-          <span className="font-mono text-emerald-300/80">
+        <div className="flex flex-col gap-2 text-xs text-muted-foreground sm:items-end">
+          <span className="font-mono text-primary">
             {truncateId(dao.id)}
           </span>
           {dao.createdAt && (
             <span>{formatDate(dao.createdAt)}</span>
           )}
           {dao.ownerUserId && (
-            <span className="font-mono text-emerald-300/80">
+            <span className="font-mono text-primary/80">
               {truncateId(dao.ownerUserId)}
             </span>
           )}
           {dao.members.length > 0 && (
-            <span>
+            <span className="font-medium">
               {dao.members.length}{" "}
               {dao.members.length === 1 ? "member" : "members"}
             </span>

@@ -25,27 +25,35 @@ export interface DaoListProps {
 
 export function DaoList({ daos, loading, error, onReload }: DaoListProps) {
   return (
-    <Card className="border-white/10 bg-black/40">
+    <Card>
       <CardHeader>
-        <CardTitle className="text-base">
-          DAOs{!loading && ` (${daos.length})`}
-        </CardTitle>
-        <CardDescription className="text-xs">
-          DAOs stored in Vetra document drive.
-        </CardDescription>
+        <div className="flex items-start justify-between">
+          <div className="space-y-1">
+            <CardTitle className="text-lg font-semibold">
+              DAOs{!loading && ` (${daos.length})`}
+            </CardTitle>
+            <CardDescription>
+              DAOs stored in Vetra document drive.
+            </CardDescription>
+          </div>
+        </div>
       </CardHeader>
 
-      <CardContent className="space-y-3">
+      <CardContent className="space-y-4">
         {loading && (
-          <div className="space-y-2">
+          <div className="space-y-3">
             {[1, 2, 3].map((i) => (
               <div
                 key={i}
-                className="rounded-md border border-slate-800/80 bg-black/60 p-3"
+                className="rounded-lg border bg-card p-4"
               >
-                <Skeleton className="mb-2 h-4 w-2/3" />
-                <Skeleton className="mb-1 h-3 w-1/2" />
-                <Skeleton className="h-3 w-1/3" />
+                <Skeleton className="mb-3 h-5 w-2/3" />
+                <Skeleton className="mb-2 h-4 w-full" />
+                <div className="flex gap-3">
+                  <Skeleton className="h-3 w-24" />
+                  <Skeleton className="h-3 w-20" />
+                  <Skeleton className="h-3 w-28" />
+                </div>
               </div>
             ))}
           </div>
@@ -56,12 +64,16 @@ export function DaoList({ daos, loading, error, onReload }: DaoListProps) {
         )}
 
         {!loading && !error && daos.length === 0 && (
-          <div className="flex flex-col items-center gap-2 py-6 text-center">
-            <Building2 className="size-8 text-slate-600" />
-            <p className="text-sm text-slate-400">No DAOs yet</p>
-            <p className="text-xs text-slate-500">
-              Create your first DAO using the form to get started.
-            </p>
+          <div className="flex flex-col items-center gap-3 rounded-lg border border-dashed py-12 text-center">
+            <div className="rounded-full bg-muted p-3">
+              <Building2 className="size-6 text-muted-foreground" />
+            </div>
+            <div className="space-y-1">
+              <p className="font-medium">No DAOs yet</p>
+              <p className="text-sm text-muted-foreground">
+                Create your first DAO using the form to get started.
+              </p>
+            </div>
           </div>
         )}
 

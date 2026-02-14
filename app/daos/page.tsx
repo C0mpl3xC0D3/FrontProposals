@@ -16,27 +16,31 @@ export default function DaosPage() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col bg-[#050816] text-slate-100">
+    <div className="flex min-h-screen flex-col">
       <SiteHeader breadcrumbs={[{ label: "DAOs" }]} />
-      <main className="flex-1 py-8">
+      <main className="flex-1 py-12">
         <Container>
-          <div className="mb-6 space-y-2">
-            <h1 className="text-2xl font-semibold text-slate-50 sm:text-3xl">
+          <div className="mb-8 space-y-3">
+            <h1 className="text-pretty text-3xl font-semibold tracking-tight sm:text-4xl">
               DAOs
             </h1>
-            <p className="max-w-2xl text-sm text-slate-300">
+            <p className="max-w-2xl text-balance text-muted-foreground leading-relaxed">
               Create and manage DAOs with their proposals and tasks on Vetra.
             </p>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-2">
-            <DaoCreateForm onCreated={handleReload} />
-            <DaoList
-              daos={daos}
-              loading={loading}
-              error={error}
-              onReload={handleReload}
-            />
+          <div className="grid gap-8 lg:grid-cols-[1fr,1.2fr]">
+            <div className="order-2 lg:order-1">
+              <DaoCreateForm onCreated={handleReload} />
+            </div>
+            <div className="order-1 lg:order-2">
+              <DaoList
+                daos={daos}
+                loading={loading}
+                error={error}
+                onReload={handleReload}
+              />
+            </div>
           </div>
         </Container>
       </main>

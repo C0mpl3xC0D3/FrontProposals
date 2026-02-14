@@ -73,20 +73,20 @@ export function ProposalCreateForm({
   }
 
   return (
-    <Card className="border-white/10 bg-black/40">
+    <Card>
       <CardHeader>
-        <CardTitle className="text-base">New proposal</CardTitle>
-        <CardDescription className="text-xs">
+        <CardTitle>New proposal</CardTitle>
+        <CardDescription>
           Create a work, budget, or decision proposal that the team will execute
           and track with tasks.
         </CardDescription>
       </CardHeader>
       <form onSubmit={handleSubmit}>
-        <CardContent className="space-y-3">
-          <div className="space-y-1.5">
+        <CardContent className="space-y-4">
+          <div className="space-y-2">
             <label
               htmlFor="proposal-title"
-              className="text-xs font-medium text-slate-200"
+              className="text-sm font-semibold text-foreground"
             >
               Title
             </label>
@@ -98,10 +98,10 @@ export function ProposalCreateForm({
             />
           </div>
 
-          <div className="space-y-1.5">
+          <div className="space-y-2">
             <label
               htmlFor="proposal-description"
-              className="text-xs font-medium text-slate-200"
+              className="text-sm font-semibold text-foreground"
             >
               Description
             </label>
@@ -114,13 +114,13 @@ export function ProposalCreateForm({
             />
           </div>
 
-          <div className="grid gap-3 sm:grid-cols-2">
-            <div className="space-y-1.5">
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div className="space-y-2">
               <label
                 htmlFor="proposal-budget"
-                className="text-xs font-medium text-slate-200"
+                className="text-sm font-semibold text-foreground"
               >
-                Budget (optional)
+                Budget <span className="text-muted-foreground font-normal">(optional)</span>
               </label>
               <Input
                 id="proposal-budget"
@@ -133,12 +133,12 @@ export function ProposalCreateForm({
               />
             </div>
 
-            <div className="space-y-1.5">
+            <div className="space-y-2">
               <label
                 htmlFor="proposal-deadline"
-                className="text-xs font-medium text-slate-200"
+                className="text-sm font-semibold text-foreground"
               >
-                Deadline (optional)
+                Deadline <span className="text-muted-foreground font-normal">(optional)</span>
               </label>
               <Input
                 id="proposal-deadline"
@@ -150,7 +150,7 @@ export function ProposalCreateForm({
           </div>
 
           {error && (
-            <p className="text-xs text-red-400">
+            <p className="text-sm text-destructive">
               Error while creating the proposal: {error}
             </p>
           )}

@@ -132,7 +132,7 @@ export default function DaoBoardPage() {
   const hasDao = !!dao;
 
   return (
-    <div className="flex min-h-screen flex-col bg-[#050816] text-slate-100">
+    <div className="flex min-h-screen flex-col bg-background">
       <SiteHeader
         breadcrumbs={[
           { label: "DAOs", href: "/daos" },
@@ -141,44 +141,44 @@ export default function DaoBoardPage() {
       />
       <main className="flex-1 py-8">
         <Container>
-          <div className="mb-6 space-y-2">
-            <h1 className="text-2xl font-semibold text-slate-50 sm:text-3xl">
+          <div className="mb-8 space-y-3">
+            <h1 className="text-balance">
               {dao?.name ?? "DAO Board"}
             </h1>
-            <p className="max-w-2xl text-sm text-slate-300">
+            <p className="max-w-2xl text-base text-muted-foreground leading-relaxed">
               Manage proposals and tasks for this DAO.
             </p>
           </div>
 
           {!hasDao && loading && (
-            <p className="mb-4 text-xs text-slate-400">
+            <p className="mb-6 text-sm text-muted-foreground">
               Loading DAO information from Vetra…
             </p>
           )}
 
           {!hasDao && !loading && !error && (
-            <p className="mb-4 text-xs text-red-400">
+            <p className="mb-6 text-sm text-destructive">
               No DAO information was found in Vetra.
             </p>
           )}
 
           {error && (
-            <p className="mb-4 text-xs text-red-400">
+            <p className="mb-6 text-sm text-destructive">
               Error loading board: {error}
             </p>
           )}
 
           {hasDao && (
             <>
-              <div className="mb-6">
+              <div className="mb-8">
                 <DaoBoardHeader dao={dao} />
               </div>
 
-              <div className="mb-6">
+              <div className="mb-8">
                 <BoardSummary proposals={proposals} tasks={tasks} />
               </div>
 
-              <div className="grid gap-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1.2fr)_minmax(0,1.1fr)]">
+              <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)_minmax(0,1fr)]">
                 {/* Column 1: Create Proposal */}
                 <ProposalCreateForm daoId={daoKey} onCreated={handleReload} />
 
@@ -195,7 +195,7 @@ export default function DaoBoardPage() {
                 />
 
                 {/* Column 3: Tasks for the selected proposal */}
-                <div className="space-y-4">
+                <div className="space-y-6">
                   <TaskList
                     tasks={tasksForSelectedProposal}
                     loading={loading}
