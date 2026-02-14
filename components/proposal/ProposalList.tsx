@@ -19,6 +19,7 @@ import {
   getStatusActionLabel,
 } from "@/lib/status";
 import { truncateId, formatDate } from "@/lib/format";
+import { SectionHeader } from "@/components/common/SectionHeader";
 
 export interface ProposalListProps {
   proposals: Proposal[];
@@ -45,15 +46,18 @@ export function ProposalList({
   onStatusChange,
 }: ProposalListProps) {
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>
-          Proposals{!loading && ` (${proposals.length})`}
-        </CardTitle>
-        <CardDescription>
-          Operational proposals and decisions stored in Vetra.
-        </CardDescription>
-      </CardHeader>
+    <div>
+      <SectionHeader
+        title="Proposals"
+        description={!loading ? `${proposals.length} operational proposals stored in Vetra` : undefined}
+        variant="list"
+      />
+      <Card>
+        <CardHeader>
+          <CardTitle>
+            All Proposals
+          </CardTitle>
+        </CardHeader>
 
       <CardContent className="space-y-4">
         {loading && (
@@ -160,24 +164,26 @@ export function ProposalList({
 
                 {/* Status action button - only show on selected proposal if there's a next status */}
                 {isSelected && nextStatus && actionLabel && onStatusChange && (
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onStatusChange(proposal.id, nextStatus);
-                    }}
-                    className="w-full"
-                  >
-                    <ArrowRight className="mr-2 size-4" />
-                    {actionLabel}
-                  </Button>
+                  <div className="flex justify-end">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onStatusChange(proposal.id, nextStatus);
+                      }}
+                    >
+                      <ArrowRight className="mr-2 size-4" />
+                      {actionLabel}
+                    </Button>
+                  </div>
                 )}
               </div>
             );
           })}
         </div>
       </CardContent>
-    </Card>
+      </Card>
+    </div>
   );
 }

@@ -140,7 +140,7 @@ export default function DaoBoardPage() {
         ]}
       />
       <main className="flex-1 py-8">
-        <Container>
+        <Container wide>
           <div className="mb-8 space-y-3">
             <h1 className="text-balance">
               {dao?.name ?? "DAO Board"}

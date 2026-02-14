@@ -14,6 +14,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/toast";
+import { SectionHeader } from "@/components/common/SectionHeader";
 
 export interface DaoCreateFormProps {
   onCreated?: () => void | Promise<void>;
@@ -57,14 +58,19 @@ export function DaoCreateForm({ onCreated }: DaoCreateFormProps) {
   }
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Create new DAO</CardTitle>
-        <CardDescription>
-          Define the space where proposals and operational tasks will be
-          grouped.
-        </CardDescription>
-      </CardHeader>
+    <div>
+      <SectionHeader
+        title="Create DAO"
+        variant="create"
+      />
+      <Card className="border-l-2 border-l-primary">
+        <CardHeader>
+          <CardTitle>New DAO</CardTitle>
+          <CardDescription>
+            Define the space where proposals and operational tasks will be
+            grouped.
+          </CardDescription>
+        </CardHeader>
       <form onSubmit={handleSubmit}>
         <CardContent className="space-y-4">
           <div className="space-y-2">
@@ -99,6 +105,7 @@ export function DaoCreateForm({ onCreated }: DaoCreateFormProps) {
         <CardFooter>
           <Button
             type="submit"
+            size="lg"
             disabled={loading || !name.trim()}
             className="w-full sm:w-auto"
           >
@@ -106,6 +113,7 @@ export function DaoCreateForm({ onCreated }: DaoCreateFormProps) {
           </Button>
         </CardFooter>
       </form>
-    </Card>
+      </Card>
+    </div>
   );
 }

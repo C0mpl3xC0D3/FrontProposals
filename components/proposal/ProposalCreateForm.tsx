@@ -14,6 +14,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/toast";
+import { SectionHeader } from "@/components/common/SectionHeader";
 
 export interface ProposalCreateFormProps {
   daoId: string;
@@ -73,14 +74,19 @@ export function ProposalCreateForm({
   }
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>New proposal</CardTitle>
-        <CardDescription>
-          Create a work, budget, or decision proposal that the team will execute
-          and track with tasks.
-        </CardDescription>
-      </CardHeader>
+    <div>
+      <SectionHeader
+        title="Create Proposal"
+        variant="create"
+      />
+      <Card className="border-l-2 border-l-primary">
+        <CardHeader>
+          <CardTitle>New proposal</CardTitle>
+          <CardDescription>
+            Create a work, budget, or decision proposal that the team will execute
+            and track with tasks.
+          </CardDescription>
+        </CardHeader>
       <form onSubmit={handleSubmit}>
         <CardContent className="space-y-4">
           <div className="space-y-2">
@@ -143,6 +149,8 @@ export function ProposalCreateForm({
               <Input
                 id="proposal-deadline"
                 type="datetime-local"
+                className="min-w-[180px]"
+                aria-label="Deadline date and time"
                 value={deadline}
                 onChange={(e) => setDeadline(e.target.value)}
               />
@@ -158,6 +166,7 @@ export function ProposalCreateForm({
         <CardFooter>
           <Button
             type="submit"
+            size="lg"
             disabled={loading || !title.trim()}
             className="w-full sm:w-auto"
           >
@@ -165,6 +174,7 @@ export function ProposalCreateForm({
           </Button>
         </CardFooter>
       </form>
-    </Card>
+      </Card>
+    </div>
   );
 }

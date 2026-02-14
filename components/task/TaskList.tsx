@@ -19,6 +19,7 @@ import {
   getStatusActionLabel,
 } from "@/lib/status";
 import { truncateId, formatDate } from "@/lib/format";
+import { SectionHeader } from "@/components/common/SectionHeader";
 
 export interface TaskListProps {
   tasks: Task[];
@@ -36,15 +37,18 @@ export function TaskList({
   onStatusChange,
 }: TaskListProps) {
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>
-          Tasks{!loading && selectedProposalKey && ` (${tasks.length})`}
-        </CardTitle>
-        <CardDescription>
-          Tasks linked to the selected proposal.
-        </CardDescription>
-      </CardHeader>
+    <div>
+      <SectionHeader
+        title="Tasks"
+        description={!loading && selectedProposalKey ? `${tasks.length} ${tasks.length === 1 ? 'task' : 'tasks'} for this proposal` : undefined}
+        variant="list"
+      />
+      <Card>
+        <CardHeader>
+          <CardTitle>
+            All Tasks
+          </CardTitle>
+        </CardHeader>
 
       <CardContent className="space-y-4">
         {loading && (
@@ -134,24 +138,26 @@ export function TaskList({
 
                 {/* Status action button - show if there's a next status */}
                 {nextStatus && actionLabel && onStatusChange && (
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onStatusChange(task.id, nextStatus);
-                    }}
-                    className="w-full"
-                  >
-                    <ArrowRight className="mr-2 size-4" />
-                    {actionLabel}
-                  </Button>
+                  <div className="flex justify-end">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onStatusChange(task.id, nextStatus);
+                      }}
+                    >
+                      <ArrowRight className="mr-2 size-4" />
+                      {actionLabel}
+                    </Button>
+                  </div>
                 )}
               </div>
             );
           })}
         </div>
       </CardContent>
-    </Card>
+      </Card>
+    </div>
   );
 }

@@ -14,6 +14,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/toast";
+import { SectionHeader } from "@/components/common/SectionHeader";
 
 export interface TaskCreateFormProps {
   daoId: string;
@@ -80,13 +81,18 @@ export function TaskCreateForm({
   }
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>New Task</CardTitle>
-        <CardDescription>
-          Tasks linked to the selected proposal.
-        </CardDescription>
-      </CardHeader>
+    <div>
+      <SectionHeader
+        title="Create Task"
+        variant="create"
+      />
+      <Card className="border-l-2 border-l-primary">
+        <CardHeader>
+          <CardTitle>New Task</CardTitle>
+          <CardDescription>
+            Tasks linked to the selected proposal.
+          </CardDescription>
+        </CardHeader>
       <form onSubmit={handleSubmit}>
         <CardContent className="space-y-4">
           {!proposalId && (
@@ -159,6 +165,8 @@ export function TaskCreateForm({
                 id="task-deadline"
                 disabled={!proposalId}
                 type="datetime-local"
+                className="min-w-[180px]"
+                aria-label="Deadline date and time"
                 value={deadline}
                 onChange={(e) => setDeadline(e.target.value)}
               />
@@ -172,6 +180,7 @@ export function TaskCreateForm({
         <CardFooter>
           <Button
             type="submit"
+            size="lg"
             disabled={loading || isDisabled}
             className="w-full sm:w-auto"
           >
@@ -179,6 +188,7 @@ export function TaskCreateForm({
           </Button>
         </CardFooter>
       </form>
-    </Card>
+      </Card>
+    </div>
   );
 }

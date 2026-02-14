@@ -15,6 +15,7 @@ import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Building2 } from "lucide-react";
 import { truncateId, formatDate } from "@/lib/format";
+import { SectionHeader } from "@/components/common/SectionHeader";
 
 export interface DaoListProps {
   daos: Dao[];
@@ -25,19 +26,18 @@ export interface DaoListProps {
 
 export function DaoList({ daos, loading, error, onReload }: DaoListProps) {
   return (
-    <Card>
-      <CardHeader>
-        <div className="flex items-start justify-between">
-          <div className="space-y-1">
-            <CardTitle className="text-lg font-semibold">
-              DAOs{!loading && ` (${daos.length})`}
-            </CardTitle>
-            <CardDescription>
-              DAOs stored in Vetra document drive.
-            </CardDescription>
-          </div>
-        </div>
-      </CardHeader>
+    <div>
+      <SectionHeader
+        title="Existing DAOs"
+        description={!loading ? `${daos.length} ${daos.length === 1 ? 'DAO' : 'DAOs'} stored in Vetra` : undefined}
+        variant="list"
+      />
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-lg font-semibold">
+            All DAOs
+          </CardTitle>
+        </CardHeader>
 
       <CardContent className="space-y-4">
         {loading && (
@@ -130,6 +130,7 @@ export function DaoList({ daos, loading, error, onReload }: DaoListProps) {
           ))}
         </div>
       </CardContent>
-    </Card>
+      </Card>
+    </div>
   );
 }
