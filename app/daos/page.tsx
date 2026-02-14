@@ -16,15 +16,15 @@ export default function DaosPage() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col bg-background">
       <SiteHeader breadcrumbs={[{ label: "DAOs" }]} />
       <main className="flex-1 py-12">
         <Container>
-          <div className="mb-8 space-y-3">
-            <h1 className="text-pretty text-3xl font-semibold tracking-tight sm:text-4xl">
+          <div className="mb-10 space-y-3">
+            <h1 className="text-balance">
               DAOs
             </h1>
-            <p className="max-w-2xl text-balance text-muted-foreground leading-relaxed">
+            <p className="max-w-2xl text-base text-muted-foreground leading-relaxed">
               Create and manage DAOs with their proposals and tasks on Vetra.
             </p>
           </div>

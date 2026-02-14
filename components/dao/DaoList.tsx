@@ -60,71 +60,68 @@ export function DaoList({ daos, loading, error, onReload }: DaoListProps) {
         )}
 
         {error && (
-          <p className="text-xs text-red-400">Error loading DAOs: {error}</p>
+          <p className="text-sm text-destructive">Error loading DAOs: {error}</p>
         )}
 
         {!loading && !error && daos.length === 0 && (
-          <div className="flex flex-col items-center gap-3 rounded-lg border border-dashed py-12 text-center">
-            <div className="rounded-full bg-muted p-3">
-              <Building2 className="size-6 text-muted-foreground" />
+          <div className="flex flex-col items-center gap-4 rounded-xl border border-dashed border-border/60 py-16 text-center">
+            <div className="rounded-full bg-primary/10 p-4">
+              <Building2 className="size-8 text-primary" />
             </div>
-            <div className="space-y-1">
-              <p className="font-medium">No DAOs yet</p>
-              <p className="text-sm text-muted-foreground">
+            <div className="space-y-2">
+              <p className="text-base font-semibold text-foreground">No DAOs yet</p>
+              <p className="text-sm text-muted-foreground max-w-sm">
                 Create your first DAO using the form to get started.
               </p>
             </div>
           </div>
         )}
 
-        <div className="space-y-2">
+        <div className="space-y-3">
           {daos.map((dao) => (
             <div
               key={dao.id}
-              className="rounded-md border border-slate-800/80 bg-black/60 p-3 text-xs sm:text-sm"
+              className="rounded-lg border border-border/60 bg-card p-5 transition-all hover:border-border hover:shadow-md"
             >
-              <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
-                <div className="space-y-1">
-                  <div className="flex items-center gap-2">
-                    <span className="font-semibold text-slate-100">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                <div className="space-y-2 flex-1">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span className="font-semibold text-foreground text-base">
                       {dao.name}
                     </span>
-                    <Badge
-                      variant="outline"
-                      className="border-emerald-500/60 text-[10px] uppercase tracking-[0.16em] text-emerald-300"
-                    >
+                    <Badge variant="default">
                       DAO
                     </Badge>
                   </div>
 
                   {dao.description && (
-                    <p className="text-xs text-slate-400">
+                    <p className="text-sm text-muted-foreground leading-relaxed">
                       {dao.description}
                     </p>
                   )}
 
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-4 flex-wrap text-xs text-muted-foreground">
                     {dao.ownerUserId && (
-                      <span className="font-mono text-xs text-emerald-300/80">
+                      <span className="font-mono text-primary/90">
                         {truncateId(dao.ownerUserId)}
                       </span>
                     )}
                     {dao.members.length > 0 && (
-                      <span className="text-xs text-slate-500">
+                      <span className="font-medium">
                         {dao.members.length}{" "}
                         {dao.members.length === 1 ? "member" : "members"}
                       </span>
                     )}
                     {dao.createdAt && (
-                      <span className="text-xs text-slate-500">
+                      <span>
                         {formatDate(dao.createdAt)}
                       </span>
                     )}
                   </div>
                 </div>
 
-                <div className="flex items-start justify-end">
-                  <Button asChild variant="outline" size="sm">
+                <div className="flex items-start justify-end sm:pt-1">
+                  <Button asChild variant="default" size="default">
                     <Link href={`/daos/${dao.id}`}>View board</Link>
                   </Button>
                 </div>
